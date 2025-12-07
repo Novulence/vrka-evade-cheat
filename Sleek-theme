@@ -1,0 +1,83 @@
+-- GUI setup
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MovementFrameGUI"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Name = "MainFrame"
+frame.Size = UDim2.new(0, 240, 0, 220)
+frame.Position = UDim2.new(1, -260, 0, 20)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30) -- dark sleek grey
+frame.BackgroundTransparency = 0.1 -- slightly translucent
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0, 10)
+uiCorner.Parent = frame
+
+-- Title bar
+local titleBar = Instance.new("Frame")
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.BackgroundColor3 = Color3.fromRGB(20, 20, 20) -- darker bar
+titleBar.BorderSizePixel = 0
+titleBar.Parent = frame
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -30, 1, 0)
+title.Position = UDim2.new(0, 8, 0, 0)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.GothamSemibold
+title.TextSize = 16
+title.TextColor3 = Color3.fromRGB(240, 240, 240) -- light grey/white
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Text = "vrka v1.2"
+title.Parent = titleBar
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 30, 1, 0)
+closeBtn.Position = UDim2.new(1, -30, 0, 0)
+closeBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+closeBtn.TextColor3 = Color3.fromRGB(240, 240, 240)
+closeBtn.Font = Enum.Font.GothamSemibold
+closeBtn.TextSize = 16
+closeBtn.Text = "X"
+closeBtn.Parent = titleBar
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 6)
+closeCorner.Parent = closeBtn
+
+-- Button creator
+local function createButton(text, posY)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(0, 200, 0, 35)
+	btn.Position = UDim2.new(0.5, -100, 0, posY)
+	btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	btn.BackgroundTransparency = 0.05
+	btn.TextColor3 = Color3.fromRGB(240, 240, 240)
+	btn.Font = Enum.Font.Gotham
+	btn.TextSize = 15
+	btn.Text = text
+	btn.Parent = frame
+
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 6)
+	corner.Parent = btn
+
+	btn.MouseEnter:Connect(function()
+		btn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+	end)
+	btn.MouseLeave:Connect(function()
+		btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	end)
+
+	return btn
+end
+
+-- Buttons
+local autoJumpBtn = createButton("Auto Jump: OFF", 45)
+local slopeAccelBtn = createButton("Slope Accel: OFF", 90)
+local invertBtn = createButton("Inverted Controls: OFF", 135)
+local edgeJumpBtn = createButton("Edge Jump: OFF", 180)
